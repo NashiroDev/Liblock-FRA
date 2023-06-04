@@ -16,4 +16,12 @@ class ArticlesController extends AbstractController
             'temp' => 'temp',
         ]);
     }
+
+    #[Route("/articles/proposals", name: 'articles.proposals.index')]
+    public function proposals(): Response
+    {
+        return $this->render('Frontend/Articles/proposals.html.twig', [
+            'temp' => 'temp',
+        ]);
+    }
 }
