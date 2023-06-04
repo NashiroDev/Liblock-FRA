@@ -19,7 +19,17 @@
     justify-content: center;
     align-items: center;
 
+    .temp-class {
+        max-width: 22%;
+        border: 1px solid black;
+    }
+
     .card {
-        max-width: 26%;
+        max-width: 22%;
+
+        img {
+            height: 10rem;
+            overflow: hidden;
+        }
     }
 }
