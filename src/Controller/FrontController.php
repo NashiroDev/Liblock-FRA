@@ -2,18 +2,42 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ArticlesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FrontController extends AbstractController
 {
+    public function __construct(
+        private readonly ArticlesRepository $articlesRepo
+    )
+    {}
+
     #[Route('/', name: 'home')]
     public function index(): Response
     {
+        $content = $this->articlesRepo->getLastArticles(5);
+
         return $this->render('Frontend/index.html.twig', [
-            'test' => 'test',
+            'articles' => $content,
+        ]);
+    }
+
+    #[Route("/articles", name: 'articles.index')]
+    public function articles(): Response
+    {
+        return $this->render('Frontend/Articles/index.html.twig', [
+            'temp' => 'temp',
+        ]);
+    }
+
+    #[Route("/articles/proposals", name: 'proposals.index')]
+    public function proposals(): Response
+    {
+        return $this->render('Frontend/Articles/proposals.html.twig', [
+            'temp' => 'temp',
         ]);
     }
 }

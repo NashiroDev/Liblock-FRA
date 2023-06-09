@@ -39,6 +39,20 @@ class ArticlesRepository extends ServiceEntityRepository
         }
     }
 
+    public function getLast5Articles(int $limit): array|bool
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a', 'u.wallet')
+            ->join('a.author', 'u.id')
+            ->where('a.status = accepted')
+            ->orderBy('a.acceptedAt', 'DESC')
+            ->setMaxResults(':limit')
+            ->setParameter('limit', $limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Articles[] Returns an array of Articles objects
 //     */

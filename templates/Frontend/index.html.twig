@@ -28,30 +28,16 @@
                 <ul class="pagination justify-content-center align-items-center">
                     <li class="page-item"><a class="page-link" href="#"><</a>
                     </li>
-                    <div class="col-3 ms-4 card">
-                        <img src="./assets/logo-black.svg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Arbitrum TVL</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Read</a>
-                        </div>
-                    </div>
-                    <div class="col-3 ms-4 card">
+                    {% for article in articles %}
+                        <div class="col-3 ms-4 card">
                         <img src="./assets/logo-color.svg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">ZkProof technology</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Read</a>
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.content|slice(0, 150) }}...</p>
+                            <a href="{{ path() }}" class="btn btn-primary">Read</a>
                         </div>
                     </div>
-                    <div class="col-3 ms-4 card">
-                        <img src="./assets/logo-white.svg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Optimistic rollup</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Read</a>
-                        </div>
-                    </div>
+                    {% endfor %}
                     <li class="page-item ms-4"><a class="page-link" href="#">></a></li>
                 </ul>
             </div>
