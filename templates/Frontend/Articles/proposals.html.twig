@@ -12,12 +12,13 @@
             <hr class="solid">
             <hr>
             <div class="row row-cols-2">
+                {% for proposal in proposals %}
                 <div class="card col proposal-card">
                     <div class="card-header">
-                        <p class"align-items-center">Proposed by : <strong>0x5e9f2403e356a45b5bb5c54...</strong><span class="badge bg-success text-light ms-4">Open</span></p>
+                        <p class"align-items-center">Proposed by : <strong>{{ proposal.author|slice(0, 6) }}...{{ proposal.author|slice(122, 128) }}</strong><span class="badge bg-success text-light ms-4">{{ proposal.status }}</span></p>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Bitcoin taproot</h5>
+                        <h5 class="card-title">{{ proposal.title }}</h5>
                         <div class="badge-section mt-2">
                             <span class="badge bg-warning text-light ms-2">Bitcoin</span>
                             <span class="badge bg-warning text-light ms-2">Proof of work</span>
@@ -30,96 +31,7 @@
                         <a href="#" class="btn btn-primary mt-2">See more</a>
                     </div>
                 </div>
-                <div class="card col proposal-card">
-                    <div class="card-header">
-                        <p class"align-items-center">Proposed by : <strong>0x5e9f2403e356a45b5bb5c54...</strong><span class="badge bg-success text-light ms-4">Open</span></p>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Bitcoin taproot</h5>
-                        <div class="badge-section mt-2">
-                            <span class="badge bg-warning text-light ms-2">Bitcoin</span>
-                            <span class="badge bg-warning text-light ms-2">Proof of work</span>
-                        </div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar-striped bg-success d-flex justify-content-center" style="width:70%">70%</div>
-                            <div class="progress-bar-striped bg-warning d-flex justify-content-center" style="width:5%">5%</div>
-                            <div class="progress-bar-striped bg-danger d-flex justify-content-center" style="width:25%">25%</div>
-                        </div>
-                        <a href="#" class="btn btn-primary mt-2">See more</a>
-                    </div>
-                </div>
-                <div class="card col proposal-card">
-                    <div class="card-header">
-                        <p class"align-items-center">Proposed by : <strong>0x5e9f2403e356a45b5bb5c54...</strong><span class="badge bg-success text-light ms-4">Open</span></p>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Bitcoin taproot</h5>
-                        <div class="badge-section mt-2">
-                            <span class="badge bg-warning text-light ms-2">Bitcoin</span>
-                            <span class="badge bg-warning text-light ms-2">Proof of work</span>
-                        </div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar-striped bg-success d-flex justify-content-center" style="width:70%">70%</div>
-                            <div class="progress-bar-striped bg-warning d-flex justify-content-center" style="width:5%">5%</div>
-                            <div class="progress-bar-striped bg-danger d-flex justify-content-center" style="width:25%">25%</div>
-                        </div>
-                        <a href="#" class="btn btn-primary mt-2">See more</a>
-                    </div>
-                </div>
-                <div class="card col proposal-card">
-                    <div class="card-header">
-                        <p class"align-items-center">Proposed by : <strong>0x5e9f2403e356a45b5bb5c54...</strong><span class="badge bg-danger text-light ms-4">Closed</span></p>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Bitcoin taproot</h5>
-                        <div class="badge-section mt-2">
-                            <span class="badge bg-warning text-light ms-2">Bitcoin</span>
-                            <span class="badge bg-warning text-light ms-2">Proof of work</span>
-                        </div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar-striped bg-success d-flex justify-content-center" style="width:70%">70%</div>
-                            <div class="progress-bar-striped bg-warning d-flex justify-content-center" style="width:5%">5%</div>
-                            <div class="progress-bar-striped bg-danger d-flex justify-content-center" style="width:25%">25%</div>
-                        </div>
-                        <a href="#" class="btn btn-primary mt-2">See more</a>
-                    </div>
-                </div>
-                <div class="card col proposal-card">
-                    <div class="card-header">
-                        <p class"align-items-center">Proposed by : <strong>0x5e9f2403e356a45b5bb5c54...</strong><span class="badge bg-danger text-light ms-4">Closed</span></p>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Bitcoin taproot</h5>
-                        <div class="badge-section mt-2">
-                            <span class="badge bg-warning text-light ms-2">Bitcoin</span>
-                            <span class="badge bg-warning text-light ms-2">Proof of work</span>
-                        </div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar-striped bg-success d-flex justify-content-center" style="width:70%">70%</div>
-                            <div class="progress-bar-striped bg-warning d-flex justify-content-center" style="width:5%">5%</div>
-                            <div class="progress-bar-striped bg-danger d-flex justify-content-center" style="width:25%">25%</div>
-                        </div>
-                        <a href="#" class="btn btn-primary mt-2">See more</a>
-                    </div>
-                </div>
-                <div class="card col proposal-card">
-                    <div class="card-header">
-                        <p class"align-items-center">Proposed by : <strong>0x5e9f2403e356a45b5bb5c54...</strong><span class="badge bg-danger text-light ms-4">Closed</span></p>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Bitcoin taproot</h5>
-                        <div class="badge-section mt-2">
-                            <span class="badge bg-warning text-light ms-2">Bitcoin</span>
-                            <span class="badge bg-warning text-light ms-2">Proof of work</span>
-                        </div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar-striped bg-success d-flex justify-content-center" style="width:70%">70%</div>
-                            <div class="progress-bar-striped bg-warning d-flex justify-content-center" style="width:5%">5%</div>
-                            <div class="progress-bar-striped bg-danger d-flex justify-content-center" style="width:25%">25%</div>
-                        </div>
-                        <a href="#" class="btn btn-primary mt-2">See more</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
