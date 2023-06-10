@@ -43,14 +43,11 @@ class ArticlesRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('a')
             ->select('a', 'u.wallet')
-            ->join('a.author', 'u.id')
+            ->join('a.author', 'u')
             ->where('a.status = :status')
             ->orderBy('a.proposedAt', 'DESC')
-            ->setMaxResults(':limit')
-            ->setParameters([
-                'limit' => $limit,
-                'status' => $status,
-            ])
+            ->setMaxResults($limit)
+            ->setParameter('status', $status)
             ->getQuery()
             ->getResult()
         ;
@@ -60,10 +57,9 @@ class ArticlesRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('a')
             ->select('a', 'u.wallet')
-            ->join('a.author', 'u.id')
+            ->join('a.author', 'u')
             ->where('a.status = :status')
             ->orderBy('a.proposedAt', 'DESC')
-            ->setMaxResults(':limit')
             ->setParameter('status', $status)
             ->getQuery()
             ->getResult()
