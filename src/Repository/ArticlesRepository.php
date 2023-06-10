@@ -39,10 +39,10 @@ class ArticlesRepository extends ServiceEntityRepository
         }
     }
 
-    public function getLastArticlesByStatus(int $limit, string $status): array|bool
+    public function getLastArticlesByStatus(int $limit, string $status): array
     {
         return $this->createQueryBuilder('a')
-            ->select('a', 'u.wallet')
+            ->select('a', 'u')
             ->join('a.author', 'u')
             ->where('a.status = :status')
             ->orderBy('a.proposedAt', 'DESC')
@@ -53,10 +53,10 @@ class ArticlesRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getAllArticlesByStatus(string $status): array|bool
+    public function getAllArticlesByStatus(string $status): array
     {
         return $this->createQueryBuilder('a')
-            ->select('a', 'u.wallet')
+            ->select('a', 'u')
             ->join('a.author', 'u')
             ->where('a.status = :status')
             ->orderBy('a.proposedAt', 'DESC')

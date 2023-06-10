@@ -28,9 +28,6 @@ class Articles
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $footer = null;
 
-    #[ORM\ManyToMany(targetEntity: Themes::class, inversedBy: 'themeArticles')]
-    private Collection $tags;
-
     #[ORM\ManyToOne(inversedBy: 'userArticles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $author = null;
@@ -48,12 +45,15 @@ class Articles
     #[ORM\Column(length: 20)]
     private ?string $status = null;
 
+    #[ORM\ManyToMany(targetEntity: Themes::class, inversedBy: 'articles')]
+    private Collection $themes;
+
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
+        $this->themes = new ArrayCollection();
     }
-
-    public function getId(): ?int
+    
+    public function getId()
     {
         return $this->id;
     }
@@ -105,31 +105,7 @@ class Articles
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Themes>
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Themes $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags->add($tag);
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Themes $tag): self
-    {
-        $this->tags->removeElement($tag);
-
-        return $this;
-    }
-
+    
     public function getAuthor(): ?users
     {
         return $this->author;
@@ -186,6 +162,30 @@ class Articles
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Themes>
+     */
+    public function getThemes(): Collection
+    {
+        return $this->themes;
+    }
+
+    public function addTheme(Themes $theme): self
+    {
+        if (!$this->themes->contains($theme)) {
+            $this->themes->add($theme);
+        }
+
+        return $this;
+    }
+
+    public function removeTheme(Themes $theme): self
+    {
+        $this->themes->removeElement($theme);
 
         return $this;
     }

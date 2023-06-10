@@ -15,7 +15,7 @@
                 {% for proposal in proposals %}
                 <div class="card col proposal-card">
                     <div class="card-header">
-                        <p class"align-items-center">Proposed by : <strong>{{ proposal.author|slice(0, 6) }}...{{ proposal.author|slice(122, 128) }}</strong><span class="badge bg-success text-light ms-4">{{ proposal.status }}</span></p>
+                        <p class"align-items-center">Proposed by : <strong>{{ proposal.author.wallet|slice(0, 6) }}...{{ proposal.author.wallet|slice(36, 41) }}</strong><span class="badge bg-success text-light ms-4">{{ proposal.status }}</span></p>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ proposal.title }}</h5>
