@@ -30,16 +30,20 @@ class FrontController extends AbstractController
     #[Route("/articles", name: 'articles.index')]
     public function articles(): Response
     {
+        $articlesContent = $this->articlesRepo->getAllArticlesByStatus('accepted');
+
         return $this->render('Frontend/Articles/index.html.twig', [
-            'temp' => 'temp',
+            'articles' => $articlesContent,
         ]);
     }
 
     #[Route("/articles/proposals", name: 'proposals.index')]
     public function proposals(): Response
     {
+        $proposalsContent = $this->articlesRepo->getAllArticlesByStatus('on going');
+
         return $this->render('Frontend/Articles/proposals.html.twig', [
-            'temp' => 'temp',
+            'proposals' => $proposalsContent,
         ]);
     }
 }

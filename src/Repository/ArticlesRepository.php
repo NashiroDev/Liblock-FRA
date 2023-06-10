@@ -45,12 +45,26 @@ class ArticlesRepository extends ServiceEntityRepository
             ->select('a', 'u.wallet')
             ->join('a.author', 'u.id')
             ->where('a.status = :status')
-            ->orderBy('a.acceptedAt', 'DESC')
+            ->orderBy('a.proposedAt', 'DESC')
             ->setMaxResults(':limit')
             ->setParameters([
                 'limit' => $limit,
                 'status' => $status,
             ])
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getAllArticlesByStatus(string $status): array|bool
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a', 'u.wallet')
+            ->join('a.author', 'u.id')
+            ->where('a.status = :status')
+            ->orderBy('a.proposedAt', 'DESC')
+            ->setMaxResults(':limit')
+            ->setParameter('status', $status)
             ->getQuery()
             ->getResult()
         ;
