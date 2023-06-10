@@ -44,6 +44,7 @@ class ArticlesRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->select('a', 'u')
             ->join('a.author', 'u')
+            ->leftjoin('a.themes', 't')
             ->where('a.status = :status')
             ->orderBy('a.proposedAt', 'DESC')
             ->setMaxResults($limit)
@@ -56,8 +57,9 @@ class ArticlesRepository extends ServiceEntityRepository
     public function getAllArticlesByStatus(string $status): array
     {
         return $this->createQueryBuilder('a')
-            ->select('a', 'u')
+            ->select('a', 'u', 't')
             ->join('a.author', 'u')
+            ->leftjoin('a.themes', 't')
             ->where('a.status = :status')
             ->orderBy('a.proposedAt', 'DESC')
             ->setParameter('status', $status)

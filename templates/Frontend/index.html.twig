@@ -34,7 +34,12 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ article.title }}</h5>
                             <p class="card-text">{{ article.content|slice(0, 150) }}...</p>
-                            <a href="#" class="btn btn-primary">Read</a>
+                            <div class="badge-section mt-2">
+                                {% for theme in article.themes %}
+                                    <span class="badge bg-warning text-light ms-2">{{ theme.name }}</span>
+                                {% endfor %}
+                            </div>
+                            <a href="#" class="btn btn-primary mt-2">Read</a>
                         </div>
                     </div>
                     {% endfor %}
@@ -59,7 +64,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ proposal.title }}</h4>
                         <p class="card-text">Proposer : {{ proposal.author.wallet|slice(0, 6) }}...{{ proposal.author.wallet|slice(36, 41) }}</p>
-                        <div class="progress">
+                        <div class="badge-section mt-2">
+                            {% for theme in proposal.themes %}
+                                <span class="badge bg-warning text-light ms-2">{{ theme.name }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="progress mt-2">
                             <div class="progress-bar-striped bg-success" style="width:5%"></div>
                             <div class="progress-bar-striped bg-warning" style="width:5%"></div>
                             <div class="progress-bar-striped bg-danger" style="width:90%"></div>

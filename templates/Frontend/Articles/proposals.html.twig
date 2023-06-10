@@ -20,8 +20,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ proposal.title }}</h5>
                         <div class="badge-section mt-2">
-                            <span class="badge bg-warning text-light ms-2">Bitcoin</span>
-                            <span class="badge bg-warning text-light ms-2">Proof of work</span>
+                            {% for theme in proposal.themes %}
+                                <span class="badge bg-warning text-light ms-2">{{ theme.name }}</span>
+                            {% endfor %}
                         </div>
                         <div class="progress mt-2">
                             <div class="progress-bar-striped bg-success d-flex justify-content-center" style="width:70%">70%</div>
