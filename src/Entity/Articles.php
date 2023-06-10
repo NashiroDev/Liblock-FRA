@@ -22,22 +22,22 @@ class Articles
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    #[ORM\Column(type: Types::JSON, nullable: true)]
     private array $images = [];
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $footer = null;
 
-    #[ORM\ManyToMany(targetEntity: themes::class, inversedBy: 'themeArticles')]
+    #[ORM\ManyToMany(targetEntity: Themes::class, inversedBy: 'themeArticles')]
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'userArticles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?users $author = null;
+    private ?Users $author = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?users $owner = null;
+    private ?Users $owner = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $proposedAt = null;
@@ -107,14 +107,14 @@ class Articles
     }
 
     /**
-     * @return Collection<int, themes>
+     * @return Collection<int, Themes>
      */
     public function getTags(): Collection
     {
         return $this->tags;
     }
 
-    public function addTag(themes $tag): self
+    public function addTag(Themes $tag): self
     {
         if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
@@ -123,7 +123,7 @@ class Articles
         return $this;
     }
 
-    public function removeTag(themes $tag): self
+    public function removeTag(Themes $tag): self
     {
         $this->tags->removeElement($tag);
 
