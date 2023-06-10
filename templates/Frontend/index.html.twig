@@ -29,7 +29,7 @@
                     <li class="page-item"><a class="page-link" href="#"><</a>
                     </li>
                     {% for article in articles %}
-                        <div class="col-3 ms-4 card">
+                    <div class="col-3 ms-4 card">
                         <img src="./assets/logo-color.svg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ article.title }}</h5>
@@ -54,10 +54,11 @@
                 <a class="link-info ms-2" href="#">View all</a>
             </div>
             <div class="justify-content-center row mt-4">
+                {% for proposal in proposals %}
                 <div class="card ms-4 col-md-3 mt-2">
                     <div class="card-body">
-                        <h5 class="card-title">Ethereum MEV</h4>
-                        <p class="card-text">Proposer : 0x6b...96a1</p>
+                        <h5 class="card-title">{{ proposal.title }}</h4>
+                        <p class="card-text">Proposer : {{ proposal.author|slice(0, 6) }}...{{ proposal.author|slice(122, 128) }}</p>
                         <div class="progress">
                             <div class="progress-bar-striped bg-success" style="width:5%"></div>
                             <div class="progress-bar-striped bg-warning" style="width:5%"></div>
@@ -66,54 +67,7 @@
                         <a href="#" class="card-link">Visit</a>
                     </div>
                 </div>
-                <div class="card ms-4 col-md-3 mt-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Cosmos tendermint</h4>
-                        <p class="card-text">Proposer : 0xaa...b6d0</p>
-                        <div class="progress">
-                            <div class="progress-bar-striped bg-success" style="width:85%"></div>
-                            <div class="progress-bar-striped bg-warning" style="width:2%"></div>
-                            <div class="progress-bar-striped bg-danger" style="width:13%"></div>
-                        </div>
-                        <a href="#" class="card-link">Visit</a>
-                    </div>
-                </div>
-                <div class="card ms-4 col-md-3 mt-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Bitcoin PoW</h4>
-                        <p class="card-text">Proposer : 0x29...aed3</p>
-                        <div class="progress">
-                            <div class="progress-bar-striped bg-success" style="width:60%"></div>
-                            <div class="progress-bar-striped bg-warning" style="width:10%"></div>
-                            <div class="progress-bar-striped bg-danger" style="width:30%"></div>
-                        </div>
-                        <a href="#" class="card-link">Visit</a>
-                    </div>
-                </div>
-                <div class="card ms-4 col-md-3 mt-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Flux PoUW</h4>
-                        <p class="card-text">Proposer : 0x8b...a161</p>
-                        <div class="progress">
-                            <div class="progress-bar-striped bg-success" style="width:70%"></div>
-                            <div class="progress-bar-striped bg-warning" style="width:5%"></div>
-                            <div class="progress-bar-striped bg-danger" style="width:25%"></div>
-                        </div>
-                        <a href="#" class="card-link">Visit</a>
-                    </div>
-                </div>
-                <div class="card ms-4 col-md-3 mt-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Kadena graph model</h4>
-                        <p class="card-text">Proposer : 0x4f...a9d1</p>
-                        <div class="progress">
-                            <div class="progress-bar-striped bg-success" style="width:35%"></div>
-                            <div class="progress-bar-striped bg-warning" style="width:25%"></div>
-                            <div class="progress-bar-striped bg-danger" style="width:44%"></div>
-                        </div>
-                        <a href="#" class="card-link">Visit</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="container">

@@ -18,10 +18,12 @@ class FrontController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(): Response
     {
-        $content = $this->articlesRepo->getLastArticles(5);
+        $articlesContent = $this->articlesRepo->getLastArticlesByStatus(5, 'accepted');
+        $proposalsContent = $this->articlesRepo->getLastArticlesByStatus(20, 'on going');
 
         return $this->render('Frontend/index.html.twig', [
-            'articles' => $content,
+            'articles' => $articlesContent,
+            'proposals' => $proposalsContent,
         ]);
     }
 
