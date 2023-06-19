@@ -48,7 +48,7 @@ class ArticlesType extends AbstractType
                 'label' => 'Images :',
                 'required' => false,
             ])
-            ->add('footer', TextType::class, [
+            ->add('footer', TextareaType::class, [
                 'label' => 'Insert creditentials and sources here (optionnal) :',
                 'required' => false,
             ])
@@ -61,7 +61,7 @@ class ArticlesType extends AbstractType
                 'label' => 'Themes :',
                 'required' => true,
                 'class' => Themes::class,
-                'choice_label' => 'Themes',
+                'choice_label' => 'themes',
             ])
         ;
     }
