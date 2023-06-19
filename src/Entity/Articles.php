@@ -48,9 +48,13 @@ class Articles
     #[ORM\ManyToMany(targetEntity: Themes::class, inversedBy: 'articles')]
     private Collection $themes;
 
+    #[ORM\ManyToMany(targetEntity: ImageFile::class, mappedBy: 'articles_id')]
+    private Collection $imageFiles;
+
     public function __construct()
     {
         $this->themes = new ArrayCollection();
+        $this->imageFiles = new ArrayCollection();
     }
     
     public function getId()
@@ -186,6 +190,33 @@ class Articles
     public function removeTheme(Themes $theme): self
     {
         $this->themes->removeElement($theme);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ImageFile>
+     */
+    public function getImageFiles(): Collection
+    {
+        return $this->imageFiles;
+    }
+
+    public function addImageFile(ImageFile $imageFile): self
+    {
+        if (!$this->imageFiles->contains($imageFile)) {
+            $this->imageFiles->add($imageFile);
+            $imageFile->addArticlesId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImageFile(ImageFile $imageFile): self
+    {
+        if ($this->imageFiles->removeElement($imageFile)) {
+            $imageFile->removeArticlesId($this);
+        }
 
         return $this;
     }
