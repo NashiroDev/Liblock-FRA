@@ -22,22 +22,19 @@ class Articles
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    #[ORM\Column(type: Types::JSON, nullable: true)]
     private array $images = [];
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $footer = null;
 
-    #[ORM\ManyToMany(targetEntity: themes::class, inversedBy: 'themeArticles')]
-    private Collection $tags;
-
     #[ORM\ManyToOne(inversedBy: 'userArticles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?users $author = null;
+    private ?Users $author = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?users $owner = null;
+    private ?Users $owner = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $proposedAt = null;
@@ -48,12 +45,19 @@ class Articles
     #[ORM\Column(length: 20)]
     private ?string $status = null;
 
+    #[ORM\ManyToMany(targetEntity: Themes::class, inversedBy: 'articles')]
+    private Collection $themes;
+
+    #[ORM\ManyToMany(targetEntity: ImageFile::class, mappedBy: 'articles_id')]
+    private Collection $imageFiles;
+
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
+        $this->themes = new ArrayCollection();
+        $this->imageFiles = new ArrayCollection();
     }
-
-    public function getId(): ?int
+    
+    public function getId()
     {
         return $this->id;
     }
@@ -105,31 +109,7 @@ class Articles
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, themes>
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(themes $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags->add($tag);
-        }
-
-        return $this;
-    }
-
-    public function removeTag(themes $tag): self
-    {
-        $this->tags->removeElement($tag);
-
-        return $this;
-    }
-
+    
     public function getAuthor(): ?users
     {
         return $this->author;
@@ -186,6 +166,57 @@ class Articles
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Themes>
+     */
+    public function getThemes(): Collection
+    {
+        return $this->themes;
+    }
+
+    public function addTheme(Themes $theme): self
+    {
+        if (!$this->themes->contains($theme)) {
+            $this->themes->add($theme);
+        }
+
+        return $this;
+    }
+
+    public function removeTheme(Themes $theme): self
+    {
+        $this->themes->removeElement($theme);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ImageFile>
+     */
+    public function getImageFiles(): Collection
+    {
+        return $this->imageFiles;
+    }
+
+    public function addImageFile(ImageFile $imageFile): self
+    {
+        if (!$this->imageFiles->contains($imageFile)) {
+            $this->imageFiles->add($imageFile);
+            $imageFile->addArticlesId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImageFile(ImageFile $imageFile): self
+    {
+        if ($this->imageFiles->removeElement($imageFile)) {
+            $imageFile->removeArticlesId($this);
+        }
 
         return $this;
     }

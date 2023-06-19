@@ -18,12 +18,12 @@ class Themes
     #[ORM\Column(length: 30)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'tags')]
-    private Collection $themeArticles;
+    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'themes')]
+    private Collection $articles;
 
     public function __construct()
     {
-        $this->themeArticles = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,25 +46,25 @@ class Themes
     /**
      * @return Collection<int, Articles>
      */
-    public function getThemeArticles(): Collection
+    public function getArticles(): Collection
     {
-        return $this->themeArticles;
+        return $this->articles;
     }
 
-    public function addThemeArticle(Articles $themeArticle): self
+    public function addArticle(Articles $article): self
     {
-        if (!$this->themeArticles->contains($themeArticle)) {
-            $this->themeArticles->add($themeArticle);
-            $themeArticle->addTag($this);
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->addTheme($this);
         }
 
         return $this;
     }
 
-    public function removeThemeArticle(Articles $themeArticle): self
+    public function removeArticle(Articles $article): self
     {
-        if ($this->themeArticles->removeElement($themeArticle)) {
-            $themeArticle->removeTag($this);
+        if ($this->articles->removeElement($article)) {
+            $article->removeTheme($this);
         }
 
         return $this;
